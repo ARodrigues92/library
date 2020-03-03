@@ -2,6 +2,7 @@ const addButtons = document.querySelectorAll(".add-button");
 const formContainer = document.getElementById("form-container");
 const tableBody = document.getElementById("table-body");
 const submit = document.getElementById("submit");
+let deleteButtons = document.querySelectorAll(".delete");
 
 let myLibrary = [];
 let lastBookNumber = 1;
@@ -11,6 +12,22 @@ addButtons.forEach((button) => {
     formContainer.style.display = "block";
   });
 });
+
+function addDeleteButtons(){
+  deleteButtons = document.querySelectorAll(".delete");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      console.log(button.getAttribute("data-book"));
+      deleteBook (button.getAttribute("data-book"));
+    });
+  });
+}
+
+function deleteBook (number){
+  let toDelete = document.querySelector(`tr[data-book="${number}"]`);
+  toDelete.remove();
+}
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -38,8 +55,22 @@ function render(){
     row.append(cell);
   }
 
+  let cell = document.createElement("td");
+  let button = document.createElement("button");
+  let icon = document.createElement("ion-icon");
+  icon.setAttribute("name", "trash-outline");
+  button.classList.add("delete");
+  button.setAttribute("type", "button");
+  button.setAttribute("data-book", parseInt(lastBookNumber)+1);
+
+  button.append(icon);
+  cell.append(button);
+  row.append(cell);
+
   tableBody.insertBefore(row, tableBody.firstChild);
   lastBookNumber = tableBody.firstElementChild.getAttribute("data-book");
+
+  addDeleteButtons();
 }
 
 submit.addEventListener("click", (e) => {
@@ -64,3 +95,5 @@ submit.addEventListener("click", (e) => {
   addBookToLibrary(bookArgs);
   render();
 });
+
+addDeleteButtons();
