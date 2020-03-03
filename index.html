@@ -33,11 +33,11 @@
             </div>
             <div id="checkbox-container" class=small-input>
               <label for="read">Read</label>
-              <input type="checkbox" id="read" name="read" value="read">
+              <input type="checkbox" id="read" name="read">
             </div>
           </div>
           <div id="submit-container">
-            <input type="submit" value="Submit">
+            <input id="submit" type="submit" value="Submit">
           </div>
         </div>
       </form>
@@ -53,15 +53,15 @@
               <th>Read</th>
             </tr>
           </thead>
-          <tbody>
-            <tr><!-- Placeholder data-->
+          <tbody id="table-body">
+            <tr data-book="1">
               <td>A brief history of time</td>
               <td>Stephen Hawking</td>
               <td>212</td>
               <td>No</td>
             </tr>
-            <tr class="color-row">
-              <td>Crime and Punishment</td>
+            <tr data-book="0" class="color-row">
+              <td>Crime and punishment</td>
               <td>Fyodor Dostoyevksy</td>
               <td>671</td>
               <td>Yes</td>
