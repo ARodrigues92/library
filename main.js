@@ -4,8 +4,16 @@ const tableBody = document.getElementById("table-body");
 const submit = document.getElementById("submit");
 let deleteButtons = document.querySelectorAll(".delete");
 
+let bookNumber = 0;
 let myLibrary = [];
-let lastBookNumber = 1;
+
+const book1 = new Book ("Crime and punishment", "Fyodor Dostoyevksy", 671, "Yes");
+const book2 = new Book ("A brief history of time", "Stephen Hawking", 212, "No");
+
+myLibrary.push(book1);
+myLibrary.push(book2);
+
+render();
 
 addButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -42,34 +50,40 @@ function addBookToLibrary(bookArgs) {
 }
 
 function render(){
-  let row = document.createElement("tr");
-  row.setAttribute("data-book", parseInt(lastBookNumber)+1);
+  for (let i=0; i<myLibrary.length; i++){
+    if (i === bookNumber){
 
-  if((parseInt(lastBookNumber)+1) % 2 === 0){ //Adds color to every other row
-    row.classList.add("color-row");
+      let row = document.createElement("tr");
+
+      if((bookNumber % 2) !== 0){ //Adds color to every other row
+        row.classList.add("color-row");
+      }
+
+      row.setAttribute("data-book", bookNumber);
+
+      for (let item in myLibrary[i]){
+        let cell = document.createElement("td");
+        cell.append(myLibrary[i][item]);
+        row.append(cell);
+      }
+
+      let cell = document.createElement("td");
+      let button = document.createElement("button");
+      let icon = document.createElement("ion-icon");
+      icon.setAttribute("name", "trash-outline");
+      button.classList.add("delete");
+      button.setAttribute("type", "button");
+      button.setAttribute("data-book", bookNumber);
+
+      button.append(icon);
+      cell.append(button);
+      row.append(cell);
+
+      tableBody.insertBefore(row, tableBody.firstChild);
+      bookNumber++;
+      //lastBookNumber = tableBody.firstElementChild.getAttribute("data-book");
+    }
   }
-
-  for (let item in myLibrary[myLibrary.length-1]){
-    let cell = document.createElement("td");
-    cell.append(myLibrary[myLibrary.length-1][item]);
-    row.append(cell);
-  }
-
-  let cell = document.createElement("td");
-  let button = document.createElement("button");
-  let icon = document.createElement("ion-icon");
-  icon.setAttribute("name", "trash-outline");
-  button.classList.add("delete");
-  button.setAttribute("type", "button");
-  button.setAttribute("data-book", parseInt(lastBookNumber)+1);
-
-  button.append(icon);
-  cell.append(button);
-  row.append(cell);
-
-  tableBody.insertBefore(row, tableBody.firstChild);
-  lastBookNumber = tableBody.firstElementChild.getAttribute("data-book");
-
   addDeleteButtons();
 }
 
@@ -95,5 +109,3 @@ submit.addEventListener("click", (e) => {
   addBookToLibrary(bookArgs);
   render();
 });
-
-addDeleteButtons();
