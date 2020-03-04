@@ -2,7 +2,6 @@ const addButtons = document.querySelectorAll(".add-button");
 const formContainer = document.getElementById("form-container");
 const tableBody = document.getElementById("table-body");
 const submit = document.getElementById("submit");
-let deleteButtons = document.querySelectorAll(".delete");
 
 let bookNumber = 0;
 let myLibrary = [];
@@ -25,10 +24,11 @@ function addDeleteButtons(){
   deleteButtons = document.querySelectorAll(".delete");
 
   deleteButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      console.log(button.getAttribute("data-book"));
+    if(button.getAttribute("data-book") == bookNumber){ //Only add eventListeners to new books
+      button.addEventListener("click", () => {
       deleteBook (button.getAttribute("data-book"));
-    });
+      });
+    }
   });
 }
 
@@ -80,11 +80,12 @@ function render(){
       row.append(cell);
 
       tableBody.insertBefore(row, tableBody.firstChild);
+
+      addDeleteButtons();
+      
       bookNumber++;
-      //lastBookNumber = tableBody.firstElementChild.getAttribute("data-book");
     }
   }
-  addDeleteButtons();
 }
 
 submit.addEventListener("click", (e) => {
