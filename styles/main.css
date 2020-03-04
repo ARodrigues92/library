@@ -139,6 +139,10 @@ table{
   background-color: #ece0c3;
 }
 
+.color-row td{
+  padding: 7px 0; 
+}
+
 th{
   font-size: 1.6em;
   font-weight: bold;
@@ -159,15 +163,11 @@ td{
   width: 35px;
 }
 
-.change-read:hover{
-  cursor: pointer;
-}
-
-
 td button{
   border: none;
   outline: none;
   background: none;
+  cursor: pointer;
 }
 
 #desktop-button-container{
@@ -262,6 +262,22 @@ td button{
   }
   
   #table-container{
-    margin-left: 130px; /* centers table and pushes the size of the button to the right*/
+    margin-left: 130px; /* centers the table by giving it a left margin of the size+margin of the add button */
+  }
+
+  th{
+    font-size: 2em;
+  }
+  
+  td{
+    font-size: 1.4em;
+  }
+  
+  .change-read{
+    width: 50px;
+  }
+
+  ion-icon{
+    font-size: 1.4em;
   }
 }
