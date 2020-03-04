@@ -21,12 +21,24 @@ addButtons.forEach((button) => {
 });
 
 function addDeleteButtons(){
-  deleteButtons = document.querySelectorAll(".delete");
+  let deleteButtons = document.querySelectorAll(".delete");
 
   deleteButtons.forEach((button) => {
     if(button.getAttribute("data-book") == bookNumber){ //Only add eventListeners to new books
-      button.addEventListener("click", () => {
-      deleteBook (button.getAttribute("data-book"));
+        button.addEventListener("click", () => {
+        deleteBook (button.getAttribute("data-book"));
+      });
+    }
+  });
+}
+
+function addReadButtons(){
+  let readButtons = document.querySelectorAll(".change-read");
+
+  readButtons.forEach((button) => {
+    if(button.getAttribute("data-book") == bookNumber){
+        button.addEventListener("click", () => {
+        changeReadStatus (button.getAttribute("data-book"), button);
       });
     }
   });
@@ -35,6 +47,18 @@ function addDeleteButtons(){
 function deleteBook (number){
   let toDelete = document.querySelector(`tr[data-book="${number}"]`);
   toDelete.remove();
+}
+
+function changeReadStatus (number, button){
+  if (myLibrary[number]["read"] === "Yes"){
+    myLibrary[number]["read"] = "No";
+    button.innerText = "No";
+    button.style.backgroundColor = "#d20000";
+  }else{
+    myLibrary[number]["read"] = "Yes";
+    button.innerText = "Yes";
+    button.style.backgroundColor = "green";
+  }
 }
 
 function Book(title, author, pages, read) {
@@ -63,8 +87,19 @@ function render(){
 
       for (let item in myLibrary[i]){
         let cell = document.createElement("td");
-        cell.append(myLibrary[i][item]);
-        row.append(cell);
+        if(item === "read"){
+          let button = document.createElement("button");
+          button.innerText = (myLibrary[i][item]);
+          myLibrary[i][item] === "Yes" ? button.style.backgroundColor = "green" : button.style.backgroundColor = "#d20000";
+          button.classList.add("change-read");
+          button.setAttribute("type", "button");
+          button.setAttribute("data-book", bookNumber);
+          cell.append(button);
+          row.append(cell);
+        }else{
+          cell.append(myLibrary[i][item]);
+          row.append(cell);
+        }
       }
 
       let cell = document.createElement("td");
@@ -82,6 +117,7 @@ function render(){
       tableBody.insertBefore(row, tableBody.firstChild);
 
       addDeleteButtons();
+      addReadButtons();
       
       bookNumber++;
     }

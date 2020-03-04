@@ -148,8 +148,21 @@ th{
 td{
   font-size: 1em;
   text-align: center;
+  vertical-align: middle;
   padding: 2px 1vw 2px 1vw;
 }
+
+.change-read{
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  width: 35px;
+}
+
+.change-read:hover{
+  cursor: pointer;
+}
+
 
 td button{
   border: none;
@@ -252,7 +265,3 @@ td button{
     margin-left: 130px; /* centers table and pushes the size of the button to the right*/
   }
 }
-
-
-
-
