@@ -36,6 +36,7 @@ h1{
 .add-button:hover{
   cursor:pointer;
   background-color: #007400;
+  transform: scale(1.2);
 }
 
 #add-button-mobile{
@@ -161,6 +162,23 @@ td{
   font-weight: bold;
   font-size: 1em;
   width: 35px;
+  padding: 4px 0;
+}
+
+.button-green{
+  background-color: green;
+}
+
+.button-red{
+  background-color: #d20000;
+}
+
+.button-green:hover{
+  background-color: #007400;
+}
+
+.button-red:hover{
+  background-color: #c70000;
 }
 
 td button{
@@ -272,9 +290,17 @@ td button{
   td{
     font-size: 1.4em;
   }
-  
+
+  td .delete:hover{
+    transform: scale(1.5);
+  }
+
   .change-read{
     width: 50px;
+  }
+
+  .button-green:hover, .button-red:hover{
+    transform: scale(1.3);
   }
 
   ion-icon{

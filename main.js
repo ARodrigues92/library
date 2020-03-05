@@ -53,11 +53,13 @@ function changeReadStatus (number, button){
   if (myLibrary[number]["read"] === "Yes"){
     myLibrary[number]["read"] = "No";
     button.innerText = "No";
-    button.style.backgroundColor = "#d20000";
+    button.classList.remove("button-green");
+    button.classList.add("button-red");
   }else{
     myLibrary[number]["read"] = "Yes";
     button.innerText = "Yes";
-    button.style.backgroundColor = "green";
+    button.classList.remove("button-red");
+    button.classList.add("button-green");
   }
 }
 
@@ -90,7 +92,7 @@ function render(){
         if(item === "read"){
           let button = document.createElement("button");
           button.innerText = (myLibrary[i][item]);
-          myLibrary[i][item] === "Yes" ? button.style.backgroundColor = "green" : button.style.backgroundColor = "#d20000";
+          myLibrary[i][item] === "Yes" ? button.classList.add("button-green") : button.classList.add("button-red");
           button.classList.add("change-read");
           button.setAttribute("type", "button");
           button.setAttribute("data-book", bookNumber);
